@@ -1,13 +1,17 @@
 const express = require('express')
 const morgan = require('morgan')
+const userRoutes = require('./routers/userRoutes')
 
 
 const server = express()
-const port = 4000
+const port = 5000
 
 server.set('port', port)
 
-server.get(morgan('dev'))
+server.use(morgan('dev'))
+server.use(express.json())
+
+server.use('/users/', userRoutes);
 
 server.get('/', (require, response) => {
     // el '/' es pa que corra en la carpeta Backend :)
